@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_nv/1507flutter/textstyleexam.dart';
 
 class ContainerExample extends StatelessWidget {
   const ContainerExample({super.key});
@@ -14,7 +15,7 @@ class ContainerExample extends StatelessWidget {
             color: Colors.amber,
             child: const Padding(
               padding: EdgeInsets.all(20),
-              child: Text("Hello flutter!"),
+              child: Text("Hello flutter!", style: CustomTextStyle.Style1),
             ),
           ),
         ),
