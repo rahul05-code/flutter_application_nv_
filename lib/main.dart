@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_nv/1507flutter/basiccompo.dart';
-import 'package:flutter_application_nv/1507flutter/columnexample.dart';
+//import 'package:flutter_application_nv/1507flutter/basiccompo.dart';
+//import 'package:flutter_application_nv/1507flutter/columnexample.dart';
+//import 'package:flutter_application_nv/2207flutter/calculator_layout.dart';
+import 'package:flutter_application_nv/2207flutter/stopwatch.dart';
 
 void main() {
   runApp(const MainApp());
@@ -13,9 +15,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SafeArea(
-        child: Columnexample(),
-      ),
+      home: SafeArea(child: Stopwatch()),
       // home: Scaffold(
       //   body: Center(
       //     child: Text('Hello World!'),
