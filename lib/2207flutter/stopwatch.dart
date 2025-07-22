@@ -27,38 +27,72 @@ class _StopwatchState extends State<Stopwatch> {
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             const SizedBox(height: 20),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  onPressed: null,
-                  style: ButtonStyle(
-                    backgroundColor: WidgetStatePropertyAll<Color>(
-                      Colors.green,
-                    ),
-                    foregroundColor: WidgetStatePropertyAll<Color>(
-                      Colors.white,
-                    ),
-                  ),
-                  child: Text("Start"),
-                ),
-                SizedBox(width: 10),
-                ElevatedButton(
-                  onPressed: null,
-                  style: ButtonStyle(
-                    backgroundColor: WidgetStatePropertyAll<Color>(Colors.red),
-                    foregroundColor: WidgetStatePropertyAll<Color>(
-                      Colors.white,
-                    ),
-                  ),
-                  child: Text("Stop"),
-                ),
-              ],
-            ),
+            controlpanel(),
+            controlpanel1(),
           ],
         ),
       ),
+    );
+  }
+
+  Row controlpanel() {
+    return const Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        ElevatedButton(
+          onPressed: null,
+          style: ButtonStyle(
+            backgroundColor: WidgetStatePropertyAll<Color>(Colors.green),
+            foregroundColor: WidgetStatePropertyAll<Color>(Colors.white),
+          ),
+          child: Text("Start"),
+        ),
+        SizedBox(width: 10),
+        ElevatedButton(
+          onPressed: null,
+          style: ButtonStyle(
+            backgroundColor: WidgetStatePropertyAll<Color>(Colors.red),
+            foregroundColor: WidgetStatePropertyAll<Color>(Colors.white),
+          ),
+          child: Text("Stop"),
+        ),
+        SizedBox(width: 10),
+        ElevatedButton(
+          onPressed: null,
+          style: ButtonStyle(
+            backgroundColor: WidgetStatePropertyAll<Color>(Colors.blue),
+            foregroundColor: WidgetStatePropertyAll<Color>(Colors.white),
+          ),
+          child: Text("Lap"),
+        ),
+      ],
+    );
+  }
+
+  Row controlpanel1() {
+    return const Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        ElevatedButton(
+          onPressed: null,
+          style: ButtonStyle(
+            backgroundColor: WidgetStatePropertyAll<Color>(Colors.yellow),
+            foregroundColor: WidgetStatePropertyAll<Color>(Colors.white),
+          ),
+          child: Text("Pause"),
+        ),
+        SizedBox(width: 10),
+        ElevatedButton(
+          onPressed: null,
+          style: ButtonStyle(
+            backgroundColor: WidgetStatePropertyAll<Color>(Colors.pink),
+            foregroundColor: WidgetStatePropertyAll<Color>(Colors.white),
+          ),
+          child: Text("Clear"),
+        ),
+      ],
     );
   }
 
