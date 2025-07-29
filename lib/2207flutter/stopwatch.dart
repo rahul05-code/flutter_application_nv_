@@ -19,22 +19,25 @@ class _StopwatchState extends State<Stopwatch> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Stopwatch")),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              "$seconds ${_secondsTotext()}",
-              style: Theme.of(context).textTheme.headlineSmall,
-            ),
-            const SizedBox(height: 10),
-            controlpanel(),
-            controlpanel1(),
-          ],
-        ),
+      appBar: AppBar(
+        title: const Text("Stopwatch"),
       ),
+      body: Center(
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            "$seconds ${_secondsTotext()}",
+            style: Theme.of(context).textTheme.headlineSmall,
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          controlpanel(),
+          controlpanel1(),
+        ],
+      )),
     );
   }
 
@@ -51,7 +54,9 @@ class _StopwatchState extends State<Stopwatch> {
           ),
           child: const Icon(Icons.start),
         ),
-        const SizedBox(width: 10),
+        const SizedBox(
+          width: 10,
+        ),
         ElevatedButton(
           onPressed: isTicking ? _stopTimer : null,
           style: const ButtonStyle(
@@ -60,7 +65,9 @@ class _StopwatchState extends State<Stopwatch> {
           ),
           child: const Icon(Icons.stop),
         ),
-        const SizedBox(width: 10),
+        const SizedBox(
+          width: 10,
+        ),
         ElevatedButton(
           onPressed: _ontapLap,
           style: const ButtonStyle(
@@ -86,7 +93,9 @@ class _StopwatchState extends State<Stopwatch> {
           ),
           child: Icon(Icons.pause),
         ),
-        SizedBox(width: 10),
+        SizedBox(
+          width: 10,
+        ),
         ElevatedButton(
           onPressed: null,
           style: ButtonStyle(
@@ -105,7 +114,11 @@ class _StopwatchState extends State<Stopwatch> {
   }
 
   void _startTimer() {
-    timer = Timer.periodic(const Duration(milliseconds: 100), _onTick);
+    timer = Timer.periodic(
+        const Duration(
+          milliseconds: 100,
+        ),
+        _onTick);
     setState(() {
       isTicking = true;
       seconds = 0;
