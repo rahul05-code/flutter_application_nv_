@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 
 class Stopwatch extends StatefulWidget {
@@ -12,6 +11,7 @@ class Stopwatch extends StatefulWidget {
 class _StopwatchState extends State<Stopwatch> {
   int seconds = 0;
   late Timer timer;
+  bool isTicking = false;
   String _secondsTotext() => seconds <= 1 ? "Second" : "Seconds";
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class _StopwatchState extends State<Stopwatch> {
               "$seconds ${_secondsTotext()}",
               style: Theme.of(context).textTheme.headlineSmall,
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
             controlpanel(),
             controlpanel1(),
           ],
@@ -36,35 +36,35 @@ class _StopwatchState extends State<Stopwatch> {
   }
 
   Row controlpanel() {
-    return const Row(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         ElevatedButton(
-          onPressed: null,
-          style: ButtonStyle(
+          onPressed: isTicking ? null : _startTimer,
+          style: const ButtonStyle(
             backgroundColor: WidgetStatePropertyAll<Color>(Colors.green),
             foregroundColor: WidgetStatePropertyAll<Color>(Colors.white),
           ),
-          child: Text("Start"),
+          child: const Icon(Icons.start),
         ),
-        SizedBox(width: 10),
+        const SizedBox(width: 10),
         ElevatedButton(
-          onPressed: null,
-          style: ButtonStyle(
+          onPressed: isTicking ? _stopTimer : null,
+          style: const ButtonStyle(
             backgroundColor: WidgetStatePropertyAll<Color>(Colors.red),
             foregroundColor: WidgetStatePropertyAll<Color>(Colors.white),
           ),
-          child: Text("Stop"),
+          child: const Icon(Icons.stop),
         ),
-        SizedBox(width: 10),
-        ElevatedButton(
+        const SizedBox(width: 10),
+        const ElevatedButton(
           onPressed: null,
           style: ButtonStyle(
             backgroundColor: WidgetStatePropertyAll<Color>(Colors.blue),
             foregroundColor: WidgetStatePropertyAll<Color>(Colors.white),
           ),
-          child: Text("Lap"),
+          child: Icon(Icons.timer),
         ),
       ],
     );
@@ -78,10 +78,10 @@ class _StopwatchState extends State<Stopwatch> {
         ElevatedButton(
           onPressed: null,
           style: ButtonStyle(
-            backgroundColor: WidgetStatePropertyAll<Color>(Colors.yellow),
+            backgroundColor: WidgetStatePropertyAll<Color>(Colors.amber),
             foregroundColor: WidgetStatePropertyAll<Color>(Colors.white),
           ),
-          child: Text("Pause"),
+          child: Icon(Icons.pause),
         ),
         SizedBox(width: 10),
         ElevatedButton(
@@ -90,7 +90,7 @@ class _StopwatchState extends State<Stopwatch> {
             backgroundColor: WidgetStatePropertyAll<Color>(Colors.pink),
             foregroundColor: WidgetStatePropertyAll<Color>(Colors.white),
           ),
-          child: Text("Clear"),
+          child: Icon(Icons.clear_outlined),
         ),
       ],
     );
@@ -99,15 +99,30 @@ class _StopwatchState extends State<Stopwatch> {
   @override
   void initState() {
     super.initState();
-    timer = Timer.periodic(const Duration(seconds: 1), _OnTick);
   }
 
-  void _OnTick(Timer timer) {
+  void _startTimer() {
+    timer = Timer.periodic(const Duration(seconds: 1), _onTick);
+    setState(() {
+      isTicking = true;
+      seconds = 0;
+    });
+  }
+
+  void _stopTimer() {
+    timer.cancel();
+    setState(() {
+      isTicking = false;
+    });
+  }
+
+  void _onTick(Timer timer) {
     setState(() {
       seconds++;
     });
   }
 
+  @override
   void dispose() {
     super.dispose();
   }
