@@ -9,9 +9,12 @@ class Stopwatch extends StatefulWidget {
 }
 
 class _StopwatchState extends State<Stopwatch> {
-  int seconds = 0;
+  double seconds = 0;
   late Timer timer;
   bool isTicking = false;
+  int millis = 0;
+  final laps = <int>[];
+
   String _secondsTotext() => seconds <= 1 ? "Second" : "Seconds";
   @override
   Widget build(BuildContext context) {
@@ -58,13 +61,13 @@ class _StopwatchState extends State<Stopwatch> {
           child: const Icon(Icons.stop),
         ),
         const SizedBox(width: 10),
-        const ElevatedButton(
-          onPressed: null,
-          style: ButtonStyle(
+        ElevatedButton(
+          onPressed: _ontapLap,
+          style: const ButtonStyle(
             backgroundColor: WidgetStatePropertyAll<Color>(Colors.blue),
             foregroundColor: WidgetStatePropertyAll<Color>(Colors.white),
           ),
-          child: Icon(Icons.timer),
+          child: const Icon(Icons.timer),
         ),
       ],
     );
@@ -102,7 +105,7 @@ class _StopwatchState extends State<Stopwatch> {
   }
 
   void _startTimer() {
-    timer = Timer.periodic(const Duration(seconds: 1), _onTick);
+    timer = Timer.periodic(const Duration(milliseconds: 100), _onTick);
     setState(() {
       isTicking = true;
       seconds = 0;
@@ -116,9 +119,19 @@ class _StopwatchState extends State<Stopwatch> {
     });
   }
 
+  void _ontapLap() {
+    setState(() {
+      laps.add(millis);
+      millis = 0;
+      seconds = 0;
+    });
+    print(laps);
+  }
+
   void _onTick(Timer timer) {
     setState(() {
-      seconds++;
+      millis += 100;
+      seconds = millis / 1000;
     });
   }
 
