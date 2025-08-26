@@ -2,7 +2,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 class Stopwatch extends StatefulWidget {
-  const Stopwatch({super.key});
+  var name, email;
+  Stopwatch({super.key, required this.name, required this.email});
 
   @override
   State<Stopwatch> createState() => _StopwatchState();
@@ -19,24 +20,27 @@ class _StopwatchState extends State<Stopwatch> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Stopwatch")),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Expanded(
-              child: Text(
-                "$seconds ${_secondsTotext()}",
-                style: Theme.of(context).textTheme.headlineSmall,
-              ),
-            ),
-            const SizedBox(height: 10),
-            Expanded(child: controlpanel()),
-            Expanded(child: builderDisplay()),
-          ],
-        ),
+      appBar: AppBar(
+        title: Text(widget.name),
       ),
+      body: Center(
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Expanded(
+            child: Text(
+              "$seconds ${_secondsTotext()}",
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Expanded(child: controlpanel()),
+          Expanded(child: builderDisplay()),
+        ],
+      )),
     );
   }
 
@@ -48,26 +52,30 @@ class _StopwatchState extends State<Stopwatch> {
         ElevatedButton(
           onPressed: isTicking ? null : _startTimer,
           style: const ButtonStyle(
-            backgroundColor: WidgetStatePropertyAll<Color>(Colors.green),
-            foregroundColor: WidgetStatePropertyAll<Color>(Colors.white),
+            backgroundColor: MaterialStatePropertyAll<Color>(Colors.green),
+            foregroundColor: MaterialStatePropertyAll<Color>(Colors.white),
           ),
           child: const Icon(Icons.start),
         ),
-        const SizedBox(width: 10),
+        const SizedBox(
+          width: 10,
+        ),
         ElevatedButton(
           onPressed: isTicking ? _stopTimer : null,
           style: const ButtonStyle(
-            backgroundColor: WidgetStatePropertyAll<Color>(Colors.red),
-            foregroundColor: WidgetStatePropertyAll<Color>(Colors.white),
+            backgroundColor: MaterialStatePropertyAll<Color>(Colors.red),
+            foregroundColor: MaterialStatePropertyAll<Color>(Colors.white),
           ),
           child: const Icon(Icons.stop),
         ),
-        const SizedBox(width: 10),
+        const SizedBox(
+          width: 10,
+        ),
         ElevatedButton(
           onPressed: _ontapLap,
           style: const ButtonStyle(
-            backgroundColor: WidgetStatePropertyAll<Color>(Colors.blue),
-            foregroundColor: WidgetStatePropertyAll<Color>(Colors.white),
+            backgroundColor: MaterialStatePropertyAll<Color>(Colors.blue),
+            foregroundColor: MaterialStatePropertyAll<Color>(Colors.white),
           ),
           child: const Icon(Icons.timer),
         ),
@@ -83,17 +91,19 @@ class _StopwatchState extends State<Stopwatch> {
         ElevatedButton(
           onPressed: null,
           style: ButtonStyle(
-            backgroundColor: WidgetStatePropertyAll<Color>(Colors.amber),
-            foregroundColor: WidgetStatePropertyAll<Color>(Colors.white),
+            backgroundColor: MaterialStatePropertyAll<Color>(Colors.amber),
+            foregroundColor: MaterialStatePropertyAll<Color>(Colors.white),
           ),
           child: Icon(Icons.pause),
         ),
-        SizedBox(width: 10),
+        SizedBox(
+          width: 10,
+        ),
         ElevatedButton(
           onPressed: null,
           style: ButtonStyle(
-            backgroundColor: WidgetStatePropertyAll<Color>(Colors.pink),
-            foregroundColor: WidgetStatePropertyAll<Color>(Colors.white),
+            backgroundColor: MaterialStatePropertyAll<Color>(Colors.pink),
+            foregroundColor: MaterialStatePropertyAll<Color>(Colors.white),
           ),
           child: Icon(Icons.clear_outlined),
         ),
@@ -107,8 +117,13 @@ class _StopwatchState extends State<Stopwatch> {
   }
 
   void _startTimer() {
-    timer = Timer.periodic(const Duration(milliseconds: 100), _onTick);
+    timer = Timer.periodic(
+        const Duration(
+          milliseconds: 100,
+        ),
+        _onTick);
     setState(() {
+      laps.clear();
       isTicking = true;
       seconds = 0;
     });
@@ -138,7 +153,7 @@ class _StopwatchState extends State<Stopwatch> {
             leading: const Icon(Icons.star),
             title: Text("Lap  : ${i / 1000} seconds"),
             trailing: const Icon(Icons.delete),
-          ),
+          )
       ],
     );
   }

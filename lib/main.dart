@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_nv/2207flutter/currency_exchange.dart';
+import 'package:flutter_application_nv/2207flutter/login_screen.dart';
 //import 'package:flutter_application_nv/1507flutter/basiccompo.dart';
 //import 'package:flutter_application_nv/1507flutter/columnexample.dart';
 //import 'package:flutter_application_nv/2207flutter/calculator_layout.dart';
@@ -13,9 +15,9 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SafeArea(child: Stopwatch()),
+      home: SafeArea(child: LoginScreenPart()),
       // home: Scaffold(
       //   body: Center(
       //     child: Text('Hello World!'),
