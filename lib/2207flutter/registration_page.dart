@@ -37,23 +37,36 @@ class _RegistrationPageState extends State<RegistrationPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            TextField(
+            TextFormField(
               controller: namecntrl,
               decoration: const InputDecoration(
                 labelText: "User Name",
                 border: OutlineInputBorder(),
               ),
+              validator: (xyz) =>
+                  xyz!.isEmpty ? "Please enter your name" : null,
             ),
             const SizedBox(height: 30),
-            TextField(
+            TextFormField(
               controller: emailcntrl,
               decoration: const InputDecoration(
                 labelText: "Email Address",
                 border: OutlineInputBorder(),
               ),
+              validator: (xyz) {
+                if (xyz!.isEmpty) {
+                  return "Email cannot be blank";
+                }
+                final regex =
+                    RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
+                if (!regex.hasMatch(xyz)) {
+                  return "Email address is not in valid format";
+                }
+                return null;
+              },
             ),
             const SizedBox(height: 30),
-            TextField(
+            TextFormField(
               controller: passwordcntrl,
               decoration: const InputDecoration(
                 labelText: "Password",
@@ -61,7 +74,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
               ),
             ),
             const SizedBox(height: 30),
-            TextField(
+            TextFormField(
               controller: confirmpasscntrl,
               decoration: const InputDecoration(
                 labelText: "Confirm Password",
@@ -69,7 +82,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
               ),
             ),
             const SizedBox(height: 30),
-            TextField(
+            TextFormField(
               controller: phonecntrl,
               decoration: const InputDecoration(
                 labelText: "Phone Number",
@@ -77,7 +90,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
               ),
             ),
             const SizedBox(height: 30),
-            TextField(
+            TextFormField(
               controller: addresscntrl,
               decoration: const InputDecoration(
                 labelText: "Address",
@@ -85,7 +98,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
               ),
             ),
             const SizedBox(height: 30),
-            TextField(
+            TextFormField(
               controller: markscntrl,
               decoration: const InputDecoration(
                 labelText: "Marks",
